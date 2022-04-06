@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bullet Hell Shooting Game", "Bullet Hell Shooting Game\Bullet Hell Shooting Game.csproj", "{3BD444AD-DF9C-4DD3-8D95-14872E36C2AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BD444AD-DF9C-4DD3-8D95-14872E36C2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD444AD-DF9C-4DD3-8D95-14872E36C2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD444AD-DF9C-4DD3-8D95-14872E36C2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD444AD-DF9C-4DD3-8D95-14872E36C2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F6BC29-6232-452D-BB3E-C297179F465F}
+	EndGlobalSection
+EndGlobal

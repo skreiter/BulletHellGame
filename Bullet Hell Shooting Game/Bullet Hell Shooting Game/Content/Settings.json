@@ -1,0 +1,140 @@
+{
+  "player": {
+    "MovementType": "User",
+    "ProjectileType": "Basic",
+    "positionx": "350",
+    "positiony": "700",
+    "sizeX": "20",
+    "sizeY": "20",
+    "speed": "200",
+    "Texture": "test_sprite",
+    "HealthTexture": "solid_color",
+    "ShotInterval": "0",
+    "Health": "20",
+    "PatternType": "Single",
+    "Lives": "2"
+  },
+
+  "keybinds": {
+    "Up": "W",
+    "Left": "A",
+    "Down": "S",
+    "Right": "D",
+    "Shoot":  "Space"
+  },
+
+  "Enemies": {
+    "GruntA": {
+      "MovementType": "GruntA",
+      "ProjectileType": "Grunt",
+      "positionx": "350",
+      "positiony": "-20",
+      "sizeX": "20",
+      "sizeY": "20",
+      "speed": "200",
+      "Texture": "Grunt",
+      "ShotInterval": "0.5",
+      "Health": "10",
+      "PatternType": "Single"
+    },
+
+    "GruntB": {
+      "MovementType": "GruntB",
+      "ProjectileType": "Grunt",
+      "positionx": "-10",
+      "positiony": "100",
+      "sizeX": "20",
+      "sizeY": "20",
+      "speed": "400",
+      "Texture": "GruntB",
+      "ShotInterval": "0.5",
+      "Health": "10",
+      "PatternType": "Single"
+    },
+
+    "MidBoss": {
+      "MovementType": "MidBoss",
+      "ProjectileType": "Grunt",
+      "positionx": "350",
+      "positiony": "-20",
+      "sizeX": "50",
+      "sizeY": "50",
+      "speed": "300",
+      "Texture": "Crab",
+      "ShotInterval": "0.5",
+      "Health": "75",
+      "PatternType": "Tri"
+
+    },
+
+    "FinalBoss": {
+      "MovementType": "FinalBoss",
+      "ProjectileType": "Grunt",
+      "positionx": "350",
+      "positiony": "-20",
+      "sizeX": "50",
+      "sizeY": "50",
+      "speed": "300",
+      "Texture": "Dragon",
+      "ShotInterval": "0.5",
+      "Health": "150",
+      "PatternType": "Tri"
+    }
+
+  },
+
+
+
+    "Stage1": {
+        "1": {
+            "id": "1",
+            "time": "0",
+            "enemyType": "GruntA",
+            "enemyAmount": "5",
+            "interval": "3"
+        },
+
+        "2": {
+            "id": "2",
+            "time": "10",
+            "enemyType": "GruntB",
+            "enemyAmount": "5",
+            "interval": "2"
+        },
+
+        "3": {
+            "time": "25",
+            "id": "3",
+            "enemyType": "MidBoss",
+            "enemyAmount": "1",
+            "interval": "1"
+        },
+        "4": {
+            "id": "4",
+            "time": "50",
+            "enemyType": "GruntA",
+            "enemyAmount": "5",
+            "interval": "2"
+        },
+
+        "5": {
+            "id": "5",
+            "time": "60",
+            "enemyType": "GruntB",
+            "enemyAmount": "5",
+            "interval": "2"
+        },
+        "6": {
+            "time": "90",
+            "id": "6",
+            "enemyType": "FinalBoss",
+            "enemyAmount": "1",
+            "interval": "1"
+        }
+
+
+    }
+}
+
+
+
