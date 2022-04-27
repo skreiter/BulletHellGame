@@ -10,7 +10,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
     {
         private Input input;
 
-        public UserControlMovement(float newSpeed, Vector2 newPos, Vector2 size) : base (newSpeed, newPos, size)
+        public UserControlMovement(Vector2 newSpeed, Vector2 newPos, Vector2 size) : base (newSpeed, newPos, size)
         {
             input = new Input();
         }
@@ -26,30 +26,30 @@ namespace Bullet_Hell_Shooting_Game.Movements
             if (direction.Y == -1 && position.Y > 0)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                    position.Y -= this.speed * (float)elapsedTime / 2;
+                    position.Y -= this.speed.Y * (float)elapsedTime / 2;
                 else
-                    position.Y -= this.speed * (float)elapsedTime;
+                    position.Y -= this.speed.Y * (float)elapsedTime;
             }
             if (direction.Y == 1 && position.Y < 800)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                    position.Y += this.speed * (float)elapsedTime / 2;
+                    position.Y += this.speed.Y * (float)elapsedTime / 2;
                 else
-                    position.Y += this.speed * (float)elapsedTime;
+                    position.Y += this.speed.Y * (float)elapsedTime;
             }
             if (direction.X == -1 && position.X > 0)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                    position.X -= this.speed * (float)elapsedTime / 2;
+                    position.X -= this.speed.X * (float)elapsedTime / 2;
                 else
-                    position.X -= this.speed * (float)elapsedTime;
+                    position.X -= this.speed.X * (float)elapsedTime;
             }
             if (direction.X == 1 && position.X < 700)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                    position.X += this.speed * (float)elapsedTime / 2;
+                    position.X += this.speed.X * (float)elapsedTime / 2;
                 else
-                    position.X += this.speed * (float)elapsedTime;
+                    position.X += this.speed.X * (float)elapsedTime;
             }
 
             return position;

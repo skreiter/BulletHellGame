@@ -1,0 +1,15 @@
+﻿{
+  "stage": {
+    "1": {
+      "time": "3",
+      "enemyType": "GruntA",
+      "enemySpeed": "300",
+      "enemyAmount": "5",
+      "interval": "3",
+      "projectileType": "Grunt",
+      "projectilePattern": "Single",
+      "positionX": "300",
+      "positionY": "-20"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+﻿{
+  "player": {
+    "MovementType": "User",
+    "ProjectileType": "Basic",
+    "positionX": "350",
+    "positionY": "700",
+    "sizeX": "20",
+    "sizeY": "20",
+    "speed": "200",
+    "Texture": "test_sprite",
+    "HealthTexture": "solid_color",
+    "ShotInterval": "0",
+    "Health": "20",
+    "PatternType": "Single",
+    "Lives": "2"
+  }
+}

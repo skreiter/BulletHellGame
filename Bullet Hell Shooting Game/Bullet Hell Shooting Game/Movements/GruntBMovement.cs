@@ -9,7 +9,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
     {
         //private int stepCount;
 
-        public GruntBMovement(float newSpeed, Vector2 newPos, Vector2 size) : base(newSpeed, newPos, size)
+        public GruntBMovement(Vector2 newSpeed, Vector2 newPos, Vector2 size) : base(newSpeed, newPos, size)
         {
             stepCount = -1;
         }
@@ -25,28 +25,28 @@ namespace Bullet_Hell_Shooting_Game.Movements
 
             if (stepCount == 8)
             {
-                distance.X = -this.speed * (float)elapsedTime;
+                distance.X = -this.speed.X * (float)elapsedTime;
                 distance.Y = 0;
                 return position + distance;
             }
 
             if (stepCount == -1)
             {
-                distance.Y = this.speed * (float)elapsedTime;
+                distance.Y = this.speed.Y * (float)elapsedTime;
                 distance.X = 0;
                 if (position.Y >= 50)
                     stepCount++;
             }
             else if (stepCount % 2 == 0)
             {
-                distance.X = this.speed * (float)elapsedTime;
+                distance.X = this.speed.X * (float)elapsedTime;
                 distance.Y = 0;
                 if (position.X >= 650)
                     stepCount++;
             }
             else if (stepCount % 2 == 1)
             {
-                distance.X = -this.speed * (float)elapsedTime;
+                distance.X = -this.speed.X * (float)elapsedTime;
                 distance.Y = 0;
                 if (position.X <= 50)
                     stepCount++;

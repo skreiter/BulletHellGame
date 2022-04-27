@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Bullet_Hell_Shooting_Game.Content.Engine.Interpreters;
+using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Text.Json;
 
 namespace Bullet_Hell_Shooting_Game
 {
@@ -18,13 +19,15 @@ namespace Bullet_Hell_Shooting_Game
         public Keys UserRight { get { return userRight; } }
         public Keys UserShoot { get { return userShoot; } }
 
-        public Keybinds(Dictionary<string, string> binds)
+        public Keybinds()
         {
-            Enum.TryParse(binds["Up"], out userUp);
-            Enum.TryParse(binds["Down"], out userDown);
-            Enum.TryParse(binds["Left"], out userLeft);
-            Enum.TryParse(binds["Right"], out userRight);
-            Enum.TryParse(binds["Shoot"], out userShoot);
+            string data = File.ReadAllText("../../../Content/Engine/KeyBinds.json");
+            KeyBindInterpreter keyBindInterpreter = JsonSerializer.Deserialize<KeyBindInterpreter>(data);
+            Enum.TryParse(keyBindInterpreter.keybinds["Up"], out userUp);
+            Enum.TryParse(keyBindInterpreter.keybinds["Down"], out userDown);
+            Enum.TryParse(keyBindInterpreter.keybinds["Left"], out userLeft);
+            Enum.TryParse(keyBindInterpreter.keybinds["Right"], out userRight);
+            Enum.TryParse(keyBindInterpreter.keybinds["Shoot"], out userShoot);
         }
     }
 }

@@ -104,7 +104,7 @@
 /processorParam:TextureFormat=Color
 /build:GruntB.png
 
-#begin test_sprite.png
+#begin InvulnerablePowerUp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -114,7 +114,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:test_sprite.png
+/build:InvulnerablePowerUp.png
+
+#begin LifePowerUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LifePowerUp.png
 
 #begin solid_color.png
 /importer:TextureImporter
@@ -127,3 +139,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:solid_color.png
+
+#begin test_sprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:test_sprite.png
+

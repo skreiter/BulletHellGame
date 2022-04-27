@@ -1,0 +1,26 @@
+﻿{
+  "stage": {
+    "1": {
+      "time": "0",
+      "enemyType": "MidBoss",
+      "enemySpeed": "300",
+      "enemyAmount": "1",
+      "interval": "3",
+      "projectileType": "Grunt",
+      "projectilePattern": "Tri",
+      "positionX": "300",
+      "positionY": "-20"
+    },
+    "2": {
+      "time": "0",
+      "enemyType": "GruntB",
+      "enemySpeed": "300",
+      "enemyAmount": "20",
+      "interval": "3",
+      "projectileType": "Grunt",
+      "projectilePattern": "Single",
+      "positionX": "-10",
+      "positionY": "100"
+    }
+  }
+}

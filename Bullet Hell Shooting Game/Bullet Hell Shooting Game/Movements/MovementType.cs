@@ -11,5 +11,6 @@ namespace Bullet_Hell_Shooting_Game.Movements
         GRUNTB,
         MIDBOSS,
         FINALBOSS,
+        CustomMovement,
     }
 }

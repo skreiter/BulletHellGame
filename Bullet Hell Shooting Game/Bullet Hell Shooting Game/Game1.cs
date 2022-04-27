@@ -3,15 +3,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.IO;
 using System.Collections.Generic;
 using Bullet_Hell_Shooting_Game.Enemies;
 using Bullet_Hell_Shooting_Game.Projectiles;
-using Bullet_Hell_Shooting_Game.Bosses;
-using Bullet_Hell_Shooting_Game.Patterns;
-using Bullet_Hell_Shooting_Game.Movements;
 
+using Bullet_Hell_Shooting_Game.Patterns;
+using Bullet_Hell_Shooting_Game.PowerUps;
+using Bullet_Hell_Shooting_Game.Content.Engine.Interpreters;
+using Bullet_Hell_Shooting_Game.Managers;
+using Bullet_Hell_Shooting_Game.Menus;
 
 namespace Bullet_Hell_Shooting_Game
 {
@@ -27,24 +28,20 @@ namespace Bullet_Hell_Shooting_Game
         private SpriteFont font;
 
         private double previousUpdate = 0;
-        private double previousEnemySpawn = 0;
         private double lastReset = 0;
 
         private List<Entity> enemies;
         private List<Projectile> projectiles;
+        private List<PowerUp> powerUps;
 
-        private EnemyFactory enemyFactory;
-        private ProjectileFactory projectileFactory;
-        private PatternFactory patternFactory;
-
-        private BossFactory bossFactory;
-        private List<Boss> bosses;
 
         private float spawn = 0;
-        private bool menuOpen = false;
-        private ContinueMenu menu;
-        public EnemyManager enemyManager;
+        private bool menuOpen = true;
+        private MainMenu menu;
 
+        private EnemyManager enemyManager;
+        private ProjectileManager projectileManager;
+        private PowerUpManager powerUpManager;
 
         //private Wave currentWave;
         public readonly Vector2[] GameLimits = new Vector2[] { new Vector2(730, 810), new Vector2(-30,-30)  };
@@ -67,14 +64,11 @@ namespace Bullet_Hell_Shooting_Game
 
         public Settings LoadJson()
         {
-            string fileName = "../../../Content/Settings.json";
-            string data = File.ReadAllText(fileName);
-
-            this.settings = JsonSerializer.Deserialize<Settings>(data);
-
-            this.keybinds = new Keybinds(settings.keybinds);
+            this.keybinds = new Keybinds();
             Input._Keybinds = keybinds;
-            player = new Player(this.settings.player, Content);
+
+            PlayerInterpreter playerInterpreter = JsonSerializer.Deserialize<PlayerInterpreter>(File.ReadAllText("../../../Content/Engine/Player.json"));
+            player = new Player(playerInterpreter.player, Content);
 
             _graphics.PreferredBackBufferWidth = 700;// GraphicsDevice.DisplayMode.Width;
             _graphics.PreferredBackBufferHeight = 800;// GraphicsDevice.DisplayMode.Height;
@@ -87,20 +81,17 @@ namespace Bullet_Hell_Shooting_Game
         {
             this.settings = LoadJson();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
             enemies = new List<Entity>();
             projectiles = new List<Projectile>();
-            previousEnemySpawn = 0;
-            enemyFactory = new EnemyFactory(Content);
-            projectileFactory = new ProjectileFactory(Content);
-            patternFactory = new PatternFactory(Content);
-            bosses = new List<Boss>();
-            bossFactory = new BossFactory(Content);
-            //currentWave = new Wave("", 0, 0);
-            enemyManager = new EnemyManager(settings, Content);
+            powerUps = new List<PowerUp>();
+
+            enemyManager = new EnemyManager(Content, enemies);
+            projectileManager = new ProjectileManager(projectiles, enemies, player, Content);
+            powerUpManager = new PowerUpManager(player, powerUps, Content);
 
             font = Content.Load<SpriteFont>("Time");
-            menu = new ContinueMenu(Content);
-            // TODO: use this.Content to load your game content here
+            menu = new MainMenu(Content);
 
         }
 
@@ -121,60 +112,12 @@ namespace Bullet_Hell_Shooting_Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
-            // Moves all current projectiles at their speed.
-            for (int i = 0; i < projectiles.Count; i++)
-            {
-                projectiles[i].Move(time - previousUpdate);
-            }
-
-            //Update Bosses
-            for (int i = 0; i < bosses.Count; i++)
-            {
-                bosses[i].Move();
-            }
-
-            for (int i = 0; i < enemies.Count; i++)
-                enemies[i].Update(time - previousUpdate);
-
             // Updates player
             player.Update(time - previousUpdate);
-            if (player.ShootCheck(time))
-                //projectiles.Add(projectileFactory.Create(player.ProjectileType, player.Position));
-                projectiles.AddRange(patternFactory.Create(player.PatternType, player.ProjectileType, player.Position));
 
-            if (enemyManager.getInterval(time) == true && enemyManager.LastWave() == true)
-            {
-                enemies.Add(enemyManager.Update(gameTime));
-            }
-
-
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i].ShootCheck(time))
-                {
-                    //projectiles.Add(projectileFactory.Create(enemies[i].ProjectileType, enemies[i].Position));
-                    if(enemies[i].PatternType == PatternType.TRI && enemies[i].StepCount > 12 && enemies[i].StepCount <= 27)
-                    {
-                        projectiles.AddRange(patternFactory.Create(PatternType.SCATTER, enemies[i].ProjectileType, enemies[i].Position));
-                    }
-                    else if(enemies[i].StepCount > 27 && enemies[i].StepCount <= 39)
-                    {
-                        projectiles.AddRange(patternFactory.Create(PatternType.SUNBURST, enemies[i].ProjectileType, enemies[i].Position));
-                    }
-                    else if(enemies[i].StepCount > 39 && enemies[i].StepCount <= 55)
-                    {
-                        projectiles.AddRange(patternFactory.Create(PatternType.BOWTIE, enemies[i].ProjectileType, enemies[i].Position));
-                    }
-                    else
-                    {
-                        projectiles.AddRange(patternFactory.Create(enemies[i].PatternType, enemies[i].ProjectileType, enemies[i].Position));
-                    }
-                    
-                }
-            }
-
+            enemyManager.Update(time);
+            projectileManager.Update(time);
+            powerUpManager.Update(time);
 
             CollisionCheck(gameTime);
             Deleter();
@@ -183,58 +126,30 @@ namespace Bullet_Hell_Shooting_Game
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// function to load the wave containing GrunB types
-        /// </summary>
-        /// <param name="gameTime"></param>
-        public void LoadWave2(GameTime gameTime)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                Projectile enemyShot = null;// enemies[i].Update(gameTime.TotalGameTime.TotalSeconds);
-                if (enemyShot != null)
-                    projectiles.Add(enemyShot);
-            }
-
-
-            if (gameTime.TotalGameTime.TotalSeconds-lastReset > this.previousEnemySpawn + 1)
-            {
-                enemies.Add(enemyFactory.SpawnEnemy("GruntB", settings.Enemies));
-                this.previousEnemySpawn = gameTime.TotalGameTime.TotalSeconds-lastReset;
-            }
-
-            //count += 1;
-
-        }
-
         protected override void Draw(GameTime gameTime)
         {
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here.
 
             _spriteBatch.Begin();
             if (menuOpen)
             {
+                GraphicsDevice.Clear(Color.Black);
                 menu.Draw(_spriteBatch);
                 _spriteBatch.End();
                 base.Draw(gameTime);
                 return;
             }
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
             _spriteBatch.Draw(player.Texture, player.Position, player.Invulnerable ? Color.Red : Color.White); // Draws the player.
-            _spriteBatch.Draw(player.HealthTexture, player.HealthRectangle, Color.White); // Draws the player.
-            _spriteBatch.Draw(player.HealthTexture, player.InnerHealthRectangle, Color.Red); // Draws the player.
+            _spriteBatch.Draw(player.HealthTexture, player.HealthRectangle, Color.White); // Draws the health bar.
+            _spriteBatch.Draw(player.HealthTexture, player.InnerHealthRectangle, Color.Red); 
             // Draws all enemies in enemy list.
             for (int i = 0; i < enemies.Count; i++)
             {
                 _spriteBatch.Draw(enemies[i].Texture, enemies[i].Position, Color.White);
-            }
-
-            // Draws Bosses
-            for (int i = 0; i < bosses.Count; i++)
-            {
-                _spriteBatch.Draw(bosses[i].Texture, bosses[i].Position, Color.White);
             }
 
             // Draws all projectiles in projectile list.
@@ -243,8 +158,11 @@ namespace Bullet_Hell_Shooting_Game
                 _spriteBatch.Draw(projectiles[i].Texture, projectiles[i].Position, Color.White);
             }
 
+            for (int i = 0; i < powerUps.Count; i++)
+                _spriteBatch.Draw(powerUps[i].Texture, powerUps[i].Position, Color.White);
+
             _spriteBatch.DrawString(font, "time: " + Math.Round((gameTime.TotalGameTime.TotalSeconds-lastReset),2) + " | " + projectiles.Count + " | " + spawn, new Vector2(350, 10), Color.Black);
-            _spriteBatch.DrawString(font, "lives: " + player.Lives, new Vector2(350, 25), Color.Black);
+            _spriteBatch.DrawString(font, "lives: " + (player.Lives + 1), new Vector2(350, 25), Color.Black);
 
 
             _spriteBatch.End();
@@ -297,7 +215,6 @@ namespace Bullet_Hell_Shooting_Game
                             enemies [j].DealDamage(projectiles [i].Damage);
                             if (enemies [j].IsDead())
                             {
-                                enemies[j].Die();
                                 enemies.RemoveAt(j);
                             }
 
@@ -327,13 +244,14 @@ namespace Bullet_Hell_Shooting_Game
         }
         private void Restart(GameTime gameTime)
         {
-            enemies.Clear();
-            projectiles.Clear();
-            previousEnemySpawn = 0;
-            enemyManager.Reset();
             player.Reset();
+            enemyManager.Reset();
+            projectileManager.Reset();
+            powerUpManager.Reset();
+
             lastReset = gameTime.TotalGameTime.TotalSeconds;
             previousUpdate = 0;
+            Random rnd = new Random();
         }
     }
 }

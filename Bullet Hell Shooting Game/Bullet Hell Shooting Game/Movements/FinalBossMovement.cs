@@ -10,7 +10,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
         //private int stepCount;
         private int waitCounter;
 
-        public FinalBossMovement(float newSpeed, Vector2 newPos, Vector2 size) : base(newSpeed, newPos, size)
+        public FinalBossMovement(Vector2 newSpeed, Vector2 newPos, Vector2 size) : base(newSpeed, newPos, size)
         {
             stepCount = -1;
             waitCounter = 0;
@@ -30,7 +30,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
             {
                 if (stepCount == 12) //exit
                 {
-                    distance.X = -this.speed * (float)elapsedTime;
+                    distance.X = -this.speed.X * (float)elapsedTime;
                     distance.Y = 0;
                     if (position.X <= 100)//this.startPos.X - 250
                     {
@@ -42,17 +42,17 @@ namespace Bullet_Hell_Shooting_Game.Movements
                 {
                     if(position.X < 350)
                     {
-                        distance.X = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
                         distance.Y = 0;   
                     }
                     else if(position.X >350)
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                     }
                     else
                     {
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.Y = this.speed.X * (float)elapsedTime;
                         distance.X = 0;
                         if (position.Y >= 150)//depth=150 //this.startPos.Y + 170
                             stepCount++;
@@ -67,8 +67,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.X >= 500)//this.startPos.X + 150
                         {
                             stepCount++;
@@ -84,7 +84,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                         if (position.X <= 200)//this.startPos.X - 150
                         {
@@ -101,8 +101,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.Y <= 150)//this.startPos.Y + 170
                         {
                             stepCount++;
@@ -115,8 +115,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
             {
                 if (stepCount == 27)
                 {
-                    distance.X = this.speed * (float)elapsedTime;
-                    distance.Y = this.speed * (float)elapsedTime;
+                    distance.X = this.speed.X * (float)elapsedTime;
+                    distance.Y = this.speed.Y * (float)elapsedTime;
                     if (position.X >= 600)//this.startPos.X + 250
                     {
                         stepCount++;
@@ -131,7 +131,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                         if (position.X <= 100)//this.startPos.X - 250
                         {
@@ -149,7 +149,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.Y >= 600) //this.startPos.Y + 620
                         {
                             stepCount++;
@@ -166,7 +166,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.Y <= 100) //this.startPos.Y + 120
                         {
                             stepCount++;
@@ -184,7 +184,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                         if (position.X >= 600) //this.startPos.X + 250
                         {
@@ -202,7 +202,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.Y >= 600) //this.startPos.Y + 620
                         {
                             stepCount++;
@@ -219,7 +219,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.Y <= 100) //this.startPos.Y + 120
                         {
                             stepCount++;
@@ -232,8 +232,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
             {
                 if (stepCount == 39)
                 {
-                    distance.X =this.speed * (float)elapsedTime;
-                    distance.Y =this.speed * (float)elapsedTime;
+                    distance.X =this.speed.X * (float)elapsedTime;
+                    distance.Y =this.speed.Y * (float)elapsedTime;
                     if(position.X >= 300)//this.startPos.X - 50
                     {
                         stepCount++;
@@ -248,7 +248,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.Y = -this.speed.X * (float)elapsedTime;
                         if (position.Y <= 100)//this.startPos.Y + 120
                         {
                             stepCount++;
@@ -264,8 +264,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.X <= 100)//this.startPos.X - 250
                         {
                             stepCount++;
@@ -283,7 +283,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.Y <= 100)//this.startPos.Y + 120
                         {
                             stepCount++;
@@ -300,8 +300,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.X >= 600)//this.startPos.X + 250
                         {
                             stepCount++;
@@ -315,7 +315,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                 if(stepCount == 55)
                 {
                     distance.X = 0;
-                    distance.Y = -this.speed * (float)elapsedTime;
+                    distance.Y = -this.speed.Y * (float)elapsedTime;
                 }
                 if(stepCount % 8 == 0)
                 {
@@ -326,7 +326,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.Y >= 400)//this.startPos.Y + 420
                         {
                             stepCount++;
@@ -343,8 +343,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.X <= 100)//this.startPos.X -250
                         {
                             stepCount++;
@@ -360,7 +360,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                         if (position.X >= 600)//this.startPos.X + 250
                         {
@@ -377,8 +377,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.X <= 400)//this.startPos.X + 50
                         {
                             stepCount++;
@@ -395,7 +395,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     else
                     {
                         distance.X = 0;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.Y <= 300)//this.startPos.Y + 320
                         {
                             stepCount++;
@@ -411,8 +411,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
-                        distance.Y = -this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
+                        distance.Y = -this.speed.Y * (float)elapsedTime;
                         if (position.X >= 600)//this.startPos.X + 250
                         {
                             stepCount++;
@@ -428,7 +428,7 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = -this.speed * (float)elapsedTime;
+                        distance.X = -this.speed.X * (float)elapsedTime;
                         distance.Y = 0;
                         if (position.X <= 100)//this.startPos.X - 250
                         {
@@ -445,8 +445,8 @@ namespace Bullet_Hell_Shooting_Game.Movements
                     }
                     else
                     {
-                        distance.X = this.speed * (float)elapsedTime;
-                        distance.Y = this.speed * (float)elapsedTime;
+                        distance.X = this.speed.X * (float)elapsedTime;
+                        distance.Y = this.speed.Y * (float)elapsedTime;
                         if (position.X <= 300)//this.startPos.X - 50
                         {
                             stepCount++;

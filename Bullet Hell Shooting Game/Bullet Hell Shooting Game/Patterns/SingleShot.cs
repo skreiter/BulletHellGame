@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Bullet_Hell_Shooting_Game.Projectiles;
+using Bullet_Hell_Shooting_Game.Movements;
 
 namespace Bullet_Hell_Shooting_Game.Patterns
 {
@@ -22,7 +23,7 @@ namespace Bullet_Hell_Shooting_Game.Patterns
             {
                 speed = new Vector2(0, -400);
             }
-            firePattern.Add(singFact.Create(type, pos, speed));
+            firePattern.Add(singFact.Create(type, pos, MovementType.CustomMovement, speed));
         }
 
         public List<Projectile>returnList()

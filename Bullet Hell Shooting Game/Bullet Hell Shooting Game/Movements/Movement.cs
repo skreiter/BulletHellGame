@@ -7,12 +7,12 @@ namespace Bullet_Hell_Shooting_Game.Movements
 {
     public  abstract class Movement
     {
-        protected float speed;
+        protected Vector2 speed;
         protected Vector2 startPos;
         protected Vector2 size;
         protected int stepCount;
 
-        public Movement(float newSpeed, Vector2 newPos, Vector2 size)
+        public Movement(Vector2 newSpeed, Vector2 newPos, Vector2 size)
         {
             this.speed = newSpeed;
             this.startPos = newPos;

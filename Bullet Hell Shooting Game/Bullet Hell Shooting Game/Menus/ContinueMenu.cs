@@ -53,6 +53,7 @@ namespace Bullet_Hell_Shooting_Game
 
         internal void Draw(SpriteBatch spriteBatch)
         {
+            
             spriteBatch.DrawString(font, "CONTINUE?", new Vector2(200, 100), Color.White, 0, Vector2.One, 3, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "Yes", new Vector2(200, 200), option ? Color.Red : Color.White, 0, Vector2.One, 2, SpriteEffects.None, 1);
             spriteBatch.DrawString(font, "No", new Vector2(200, 300), option ? Color.White : Color.Red, 0, Vector2.One, 2, SpriteEffects.None, 1);

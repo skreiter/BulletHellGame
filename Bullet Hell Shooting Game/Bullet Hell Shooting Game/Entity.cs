@@ -11,7 +11,7 @@ using Bullet_Hell_Shooting_Game.Patterns;
 
 namespace Bullet_Hell_Shooting_Game.Enemies
 {
-    public abstract class Entity
+    public class Entity
     {
 
         protected int maxHP;
@@ -39,7 +39,7 @@ namespace Bullet_Hell_Shooting_Game.Enemies
         public Entity(ContentManager content, Dictionary<string, string> entitySettings)
         {
             this.texture = content.Load<Texture2D>(entitySettings["Texture"]);
-            this.initialPosition = new Vector2(Int32.Parse(entitySettings["positionx"]), Int32.Parse(entitySettings["positiony"]));
+            this.initialPosition = new Vector2(Int32.Parse(entitySettings["positionX"]), Int32.Parse(entitySettings["positionY"]));
             ResetPosition();
             this.movement = (new MovementFactory()).Create((MovementType) Enum.Parse(typeof(MovementType), entitySettings ["MovementType"], true), this.position, this.size, Int32.Parse(entitySettings["speed"]));
             this.prevShotTime = float.Parse(entitySettings ["ShotInterval"]);
@@ -98,6 +98,5 @@ namespace Bullet_Hell_Shooting_Game.Enemies
             return false;
         }
 
-        public abstract void Die();
     }
 }
